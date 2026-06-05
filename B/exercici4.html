@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registre de Jubilacions</title>
+    <style>
+        /* CSS per a l'estructura i el disseny */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 30px;
+            line-height: 1.6;
+            transition: background-color 0.4s, color 0.4s;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: background-color 0.4s;
+        }
+
+        .inputs-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .buttons-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: opacity 0.2s;
+        }
+
+        #btnRegistrar { background-color: #28a745; color: white; }
+        #btnNetejar { background-color: #dc3545; color: white; }
+        #btnValidar { background-color: #007bff; color: white; }
+        #btnModeFosc { background-color: #6c757d; color: white; }
+
+        button:hover { opacity: 0.8; }
+
+        ul {
+            margin-top: 30px;
+            padding-left: 20px;
+        }
+
+        li {
+            background: #e9ecef;
+            margin-bottom: 8px;
+            padding: 10px;
+            border-radius: 4px;
+            list-style: none;
+        }
+
+        #imgValidacio {
+            margin-top: 20px;
+            width: 200px;
+            height: auto;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            display: block;
+        }
+
+        /* Estils per al Mode Fosc */
+        .dark-mode {
+            background-color: #121212;
+            color: #ffffff;
+        }
+
+        .dark-mode .container {
+            background-color: #1e1e1e;
+            color: #ffffff;
+        }
+
+        .dark-mode li {
+            background: #333;
+            color: #eee;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Registre de Jubilació</h1>
+
+        <div class="inputs-group">
+            <input type="text" id="nom" placeholder="Nom de la persona">
+            <input type="number" id="anyNaixement" placeholder="Any de naixement (ex: 1995)">
+            <input type="number" id="sou" placeholder="Sou actual mensual (€)">
+        </div>
+
+        <div class="buttons-group">
+            <button id="btnRegistrar">Registrar</button>
+            <button id="btnNetejar">Netejar llista</button>
+            <button id="btnValidar">Validar</button>
+            <button id="btnModeFosc">Mode fosc</button>
+        </div>
+
+        <h3>Registres realitzats:</h3>
+        <ul id="llistaRegistres"></ul>
+
+        <p><strong>Total Cost (Suma de jubilacions): </strong><span id="totalCost">0</span> €</p>
+
+        <img id="imgValidacio" src="https://via.placeholder.com/200?text=Esperant+Validació" alt="Imatge de validació">
+    </div>
+
+    <script>
+        
+    </script>
+</body>
+</html>

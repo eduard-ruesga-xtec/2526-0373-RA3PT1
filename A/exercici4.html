@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registre de Verdures</title>
+    <style>
+        /* CSS Bàsic */
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .formulari {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        input {
+            margin: 5px;
+            padding: 8px;
+        }
+
+        button {
+            margin: 5px;
+            padding: 8px 15px;
+            cursor: pointer;
+        }
+
+        #llistaVerdures {
+            margin-top: 20px;
+        }
+
+        #imgValidacio {
+            width: 150px;
+            height: 150px;
+            display: block;
+            margin-top: 10px;
+            object-fit: cover;
+            border: 1px solid #ddd;
+        }
+
+        /* Estils per al Mode Fosc */
+        .dark-mode {
+            background-color: black;
+            color: white;
+        }
+        
+        .dark-mode .formulari {
+            border-color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Registre d'Entrada de Verdures</h1>
+
+    <div class="formulari">
+        <input type="text" id="nomVerdura" placeholder="Nom de la verdura">
+        <input type="number" id="kg" placeholder="Kilograms (kg)">
+        <input type="number" id="preu" placeholder="Preu (€/kg)" step="0.01">
+        <br>
+        <button id="btnRegistrar">Registrar</button>
+        <button id="btnNetejar">Netejar llista</button>
+        <button id="btnValidar">Validar</button>
+        <button id="btnModeFosc">Mode fosc</button>
+    </div>
+
+    <h3>Llista de Registres:</h3>
+    <ul id="llistaVerdures"></ul>
+
+    <p><strong>Cost Total (sense IVA): </strong><span id="totalCost">0</span> euros</p>
+
+    <img id="imgValidacio" src="https://via.placeholder.com/150?text=Sense+Validar" alt="Estat validació">
+
+    <script>
+        
+    </script>
+
+</body>
+</html>

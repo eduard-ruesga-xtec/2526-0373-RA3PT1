@@ -30,4 +30,10 @@ for (let i =workinString.length-1; i>=0; i--){
     outString = outString + workinString[i]; //Recordeu que outstring anirant concatenant amb el character de workstring[i]. El simbol "+" ajunta strings.
 }
 
+//Métode 2: fent servir funcions ja fetes ->paso l'string a array, faig un reverse i torno a pasar a String
+/*let outArray = workinString.split(""); //-> Si faig un split sense caràcter tindrè tot l'string separat lletra a lletra en un array.
+console.log(outArray)
+outArray.reverse();
+outString = outArray.join(""); //La funció JOIN, recordem que retorna un string on cada valor es separa pel string que es pasa per valor (entre parentesis)*/
+
 console.log(outString);
