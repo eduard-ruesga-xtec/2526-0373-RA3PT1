@@ -67,7 +67,7 @@
         }
 
         li {
-            background: #e9ecef;
+            background-color: #e9ecef;
             margin-bottom: 8px;
             padding: 10px;
             border-radius: 4px;
@@ -95,7 +95,7 @@
         }
 
         .dark-mode li {
-            background: #333;
+            background-color: #333;
             color: #eee;
         }
     </style>
@@ -127,7 +127,110 @@
     </div>
 
     <script>
+
+        const constDeJubilacio = 12*(0.08);      //Com sempre fem el càlcul pels mateixos valors, ja guardo els que es repeteixen ja precalculats. 
+        const edatJubilacio  = 67;            //L'edat de jubilació sempres és la mateixa per això és una constant
+        const currentYear    = 2026;
+      
+        //Els events es poden realitzar directament des de el HTML o des de JS.
+
+        //Capturem els elements necessàris del DOM per a treballar i els guardem en constants. 
+        const inputNom = document.getElementById('nom'); //-> Fixeu-vos que el nom de la constant fa referencia al tipus i el nom de l'element. En aquest cas input, així podem diferenciar diferents entre elements o dades.
+        const inputAny = document.getElementById('anyNaixement');
+        const inputSou = document.getElementById('sou');
+
+        const btnRegistrar = document.getElementById('btnRegistrar');
+        const btnNetejar = document.getElementById('btnNetejar');
+        const btnValidar = document.getElementById('btnValidar');
+        const btnModeFosc = document.getElementById('btnModeFosc');
+
+        const llistaRegistres = document.getElementById('llistaRegistres');
+        const spanTotalCost = document.getElementById('totalCost');
+        const imgValidacio = document.getElementById('imgValidacio');
+
+        let costAcumulatTotal = 0;
         
+        //Registrem els events de botons
+        btnRegistrar.addEventListener('click', registrarPersona);  //Apartat 4.A, dins es troba la resolució 4.B
+        btnNetejar.addEventListener('click', netejaLlista);         //Apartat 4.C
+        btnValidar.addEventListener('click', validateTotalCost);    //Apartat 4.D
+        btnModeFosc.addEventListener('click', darkModeToggle);      //Apartat 4.E
+
+        //Funcions implementades que seran cridades pels events:
+        function registrarPersona(){
+            //Capturem les DADES:
+            const nomPersona   = inputNom.value.trim();  //Amb value mirem la dada que que s'ha escrit. Amb trim() netejem espais innecessaris.
+            const anyNaixement = parseFloat(inputAny.value);   //No cal trim, és un input de type number, por tant, no es poden afegir espais. ParseFloat intentarà trasnformar la dada a decimal
+            const souActual    = parseFloat(inputSou.value);
+
+            //Comprobem que l'event funciona fent un console.log
+            console.log("registrarPersonas disparat!");
+
+            //Validem que els camps estan plens. No hi ha validació a l'HTML, per tant la fem per JS
+            if(nomPersona ==="" || nomPersona == null || isNaN(anyNaixement) || isNaN(souActual)){
+                alert("Error! Camps buits, si us plau, omple tots el camps abans de registrar.");
+            }else{
+                //Si les dades són correctes procedim a fer els càlculs.
+                //Dins de l'else ens asegurem que no es fan els càlculs amb NaNs i provoqui errors.
+
+                //Comprobem que entrem a la zona de càlculs correctament
+                //console.log("Camps a registrar correctes!");
+
+                //Càlculs
+                let anyJubiliacio = anyNaixement + edatJubilacio;
+                let anysPerALaJubilacio = anyJubiliacio - currentYear;
+                let totalJubilacioCalculat = souActual * anysPerALaJubilacio * constDeJubilacio; //Per a calcular el total acumulat per a la jubilació que es dedueix del sou
+
+                //Crear el nou element de la llista (li)
+                let nouElementLlista = document.createElement("li"); 
+                nouElementLlista.textContent = `${nomPersona}, ${anyNaixement}anyNaixement, Sou actual: ${souActual} euros. Any de jubilació: ${anyJubiliacio}. Total Jubilació: ${totalJubilacioCalculat}`;
+
+                //Ara afegim l'element li nou a la llista (ul) la tenim guardada a llistaRegistres.
+                llistaRegistres.appendChild(nouElementLlista);  //AppendChild afegeix el que pasem per varlor (el que pasem per parentesis) com a fill jeràrquic (a dins).
+
+
+                /*** Resolució de l'apartat 4.B ***********************************/
+                //Ara actualitzem el cost total sense totalJubilacio a la variable acumuladora
+                costAcumulatTotal = costAcumulatTotal + totalJubilacioCalculat;
+
+                //Actualitzem l'element d'HTML on mostra el costTotal
+                spanTotalCost.textContent = costAcumulatTotal; //El textContent és la propietat del text dins de l'etiqueta. En aquest cas, un SPAN. Per ficar un nou valor ho fem amb =
+                /******************************************************************/
+
+
+                //Aquest pas no es obligatori però millora la usabilitat: netejar els camps dels inputs
+                inputNom.value = "";
+                inputAny.value  = "";
+                inputSou.value= "";
+            }
+        }
+
+        //Programació de l'apartat 4.C
+        function netejaLlista(){
+            llistaRegistres.innerHTML = "";  //InnerHTML és on es guarda tot el que hi ha dins de l'etiqueta guardada.
+        }
+
+        //Programació de l'apartat 4.D
+        function validateTotalCost(){
+            if(costAcumulatTotal > 100000){ //Com costAcumuatTotal ha sigut creada fora de cada funció podem consultar-la en qualsevol moment.
+                imgValidacio.src = "img/img1.jpg";  //src -> és l'atribut de l'imatge que indica la ruta.
+            }else{
+                imgValidacio.src = "img/img2.jpeg";
+            }
+        }
+
+        //Programació de l'apartat 4.E
+            //El resoldré fent més del que demana l'enunciat. Fem que al tornar a apretar tornem al mode anterior amb "toggle" que afegeix una classe CSS si l'element no la té i la elimina si ja la tenia.
+            //Canviaré el text del botó.
+        function darkModeToggle(){
+            //Afegrirem i treurem (toggle) la classe CSS .dark-mode al body directament.
+            document.body.classList.toggle("dark-mode"); //No cal canviar cap element més, revisar les dues classes CSS.
+            if(btnModeFosc.textContent == "Mode fosc"){
+                btnModeFosc.textContent = "Mode clar";
+            }else{
+                btnModeFosc.textContent = "Mode fosc";
+            }
+        }
     </script>
 </body>
 </html>
